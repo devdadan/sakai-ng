@@ -1,0 +1,117 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Data SLA CO</h5>
+            <p-table  #dt1 [value]="datacosla" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['tanggal','noco','toko','masalah','ket','user']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<button pButton label="Input data baru" class="p-button-outlined mb-2" icon="pi pi-plus-circle"></button>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Tanggal
+								<p-columnFilter type="text" field="tanggal" display="menu" placeholder="Search by tanggal"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 14rem">
+							<div class="flex justify-content-between align-items-center">
+								No CO
+								<p-columnFilter type="text" field="noco" display="menu" placeholder="Search by no co"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 14rem">
+							<div class="flex justify-content-between align-items-center">
+								Toko
+								<p-columnFilter type="text" field="toko" display="menu" placeholder="Search by toko"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 14rem">
+							<div class="flex justify-content-between align-items-center">
+								Masalah
+								<p-columnFilter type="text" field="masalah" display="menu" placeholder="Search by masalah"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 14rem">
+							<div class="flex justify-content-between align-items-center">
+								Keterangan
+								<p-columnFilter type="text" field="ket" display="menu" placeholder="Search by keterangan"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 14rem">
+							<div class="flex justify-content-between align-items-center">
+								User
+								<p-columnFilter type="text" field="user" display="menu" placeholder="Search by user"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 14rem">
+							<div class="flex justify-content-between align-items-center">
+								TakeIT
+							</div>
+						</th>
+                        <th style="min-width: 14rem">
+							<div class="flex justify-content-between align-items-center">
+								Selesai
+							</div>
+						</th>
+                        <th style="min-width: 14rem">
+							<div class="flex justify-content-between align-items-center">
+								Shift
+							</div>
+						</th>
+
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-cosla>
+					<tr>
+						<td>
+                            {{ cosla.tanggalco | date:'dd-MM-yyyy' }}
+						</td>
+						<td>
+							{{ cosla.noco }}
+						</td>
+						<td>
+							{{ cosla.kodetoko }}
+						</td>
+                        <td>
+							{{ cosla.masalah }}
+						</td>
+                        <td>
+							{{ cosla.keterangan }}
+						</td>
+
+                        <td>
+							{{ cosla.user }}
+						</td>
+                        <td>
+							{{ cosla.waktutakeit }}
+						</td>
+                        <td>
+							{{ cosla.jamselesai }}
+						</td>
+                        <td>
+							{{ cosla.shift }}
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No data found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading customers data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+        </div>
+    </div>
+</div>
+

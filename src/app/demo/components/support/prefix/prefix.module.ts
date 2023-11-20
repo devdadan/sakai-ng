@@ -14,7 +14,6 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { ToastModule } from 'primeng/toast';
 import { SliderModule } from 'primeng/slider';
 import { RatingModule } from 'primeng/rating';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 @NgModule({
     imports: [
@@ -32,7 +31,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 		DropdownModule,
 		ProgressBarModule,
 		ToastModule,
-		
+
     ],
     declarations: [PrefixComponent]
 })

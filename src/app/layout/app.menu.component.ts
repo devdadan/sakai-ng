@@ -24,7 +24,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Support toko',
                 items: [
                     { label: 'Prefix co', icon: 'pi pi-fw pi-id-card', routerLink: ['/support/prefix'] },
-                    { label: 'SLA CO', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },
+                    { label: 'SLA CO', icon: 'pi pi-fw pi-check-square', routerLink: ['/support/cosla'] },
                 ]
             },
             {
@@ -34,7 +34,7 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Program exist', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
                     { label: 'Perubahan program', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
                     { label: 'FTP Program', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
-                    
+
                 ]
             },
             {
@@ -73,8 +73,8 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-calendar',
                         routerLink: ['/pages/timeline']
                     },
-                    
-                    
+
+
                 ]
             }
         ];
