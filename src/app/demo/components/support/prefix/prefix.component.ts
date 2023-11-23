@@ -9,7 +9,7 @@ import { AuthService } from "src/app/demo/service/auth.services";
 
 @Component({
     templateUrl: './prefix.component.html',
-})
+}) 
 export class PrefixComponent implements OnInit{
     dataprefix : any[];
     loading: boolean = true;

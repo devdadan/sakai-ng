@@ -30,10 +30,8 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Program toko',
                 items: [
-                    { label: 'Program simulasi', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW' },
-                    { label: 'Program exist', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
-                    { label: 'Perubahan program', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
-                    { label: 'FTP Program', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
+                    { label: 'Program Toko', icon: 'pi pi-fw pi-eye', routerLink: ['/program'], badge: 'NEW' }
+                    
 
                 ]
             },
