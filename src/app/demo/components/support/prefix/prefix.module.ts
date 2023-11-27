@@ -14,6 +14,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { ToastModule } from 'primeng/toast';
 import { SliderModule } from 'primeng/slider';
 import { RatingModule } from 'primeng/rating';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
     imports: [
@@ -31,6 +33,8 @@ import { RatingModule } from 'primeng/rating';
 		DropdownModule,
 		ProgressBarModule,
 		ToastModule,
+		// ToolbarModule,
+		TooltipModule,
 
     ],
     declarations: [PrefixComponent]

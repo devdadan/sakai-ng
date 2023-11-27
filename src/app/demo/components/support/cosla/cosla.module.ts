@@ -15,6 +15,7 @@ import { ToastModule } from 'primeng/toast';
 import { SliderModule } from 'primeng/slider';
 import { RatingModule } from 'primeng/rating';
 import { CoslaService } from 'src/app/demo/service/support.service';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
     imports: [
@@ -32,6 +33,7 @@ import { CoslaService } from 'src/app/demo/service/support.service';
 		DropdownModule,
 		ProgressBarModule,
 		ToastModule,
+		TooltipModule,
 
     ],
     declarations: [CoslaComponent],
