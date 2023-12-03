@@ -13,6 +13,13 @@ export class PrefixService {
   getData(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/dataprefix`);
   }
+  saveData(id: number, data: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/dataprefix/${id}`, data);
+  }
+  deleteData(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/dataprefix/${id}`);
+  }
+  
 }
 @Injectable({
     providedIn: 'root',

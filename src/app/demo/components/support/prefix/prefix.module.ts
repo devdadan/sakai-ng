@@ -16,7 +16,10 @@ import { SliderModule } from 'primeng/slider';
 import { RatingModule } from 'primeng/rating';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
-
+import { DialogModule } from 'primeng/dialog';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MessageService } from 'primeng/api';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 @NgModule({
     imports: [
         CommonModule,
@@ -33,10 +36,15 @@ import { TooltipModule } from 'primeng/tooltip';
 		DropdownModule,
 		ProgressBarModule,
 		ToastModule,
-		// ToolbarModule,
+		DialogModule,
 		TooltipModule,
+		InputTextareaModule,
+		ToolbarModule,
+		AutoCompleteModule,
+	
 
     ],
+	providers: [MessageService],
     declarations: [PrefixComponent]
 })
 export class PrefixModule { }

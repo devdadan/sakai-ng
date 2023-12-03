@@ -18,10 +18,13 @@ export class ReleaseTableComponent implements OnInit {
 
     async ngOnInit() {
         try {
+            this.loading = true;
             this.datarelease = await this.releaseservice.getData().toPromise();
             this.datarelease.forEach((row) => (this.visible[row.id] = false));
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            this.loading = false;
         }
     }
 

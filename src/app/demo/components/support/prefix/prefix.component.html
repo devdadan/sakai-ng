@@ -1,7 +1,53 @@
 <div class="grid">
     <div class="col-12">
         <div class="card">
-            <h5>Prefix CO</h5>
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button
+                            pButton
+                            pRipple
+                            label="New"
+                            icon="pi pi-plus"
+                            class="p-button-success mr-2"
+                            (click)="inputData()"
+                        ></button>
+                        <button
+                            pButton
+                            pRipple
+                            label="Delete"
+                            icon="pi pi-trash"
+                            class="p-button-danger"
+                            (click)="deleteSelectedProducts()"
+                            [disabled]="
+                                !selectedProducts || !selectedProducts.length
+                            "
+                        ></button>
+                        <button
+                            type="button"
+                            pButton
+                            pRipple
+                            icon="pi pi-file-excel"
+                            (click)="exportExcel()"
+                            class="p-button-success mr-2 ml-2"
+                            pTooltip="XLS"
+                            tooltipPosition="bottom"
+                        ></button>
+                        <button
+                            type="button"
+                            pButton
+                            pRipple
+                            icon="pi pi-file-pdf"
+                            (click)="exportPdf()"
+                            class="p-button-warning mr-2"
+                            pTooltip="PDF"
+                            tooltipPosition="bottom"
+                        ></button>
+                    </div>
+                </ng-template>
+            </p-toolbar>
+
             <p-table
                 #dt1
                 [value]="dataprefix"
@@ -17,35 +63,8 @@
             >
                 <ng-template pTemplate="caption">
                     <div class="flex">
-                        <button
-                            type="button"
-                            pButton
-                            pRipple
-                            icon="pi pi-plus"
-                            class="mr-2"
-                            pTooltip="Tambah Data"
-                            tooltipPosition="bottom"
-                        ></button>
-                        <button
-                            type="button"
-                            pButton
-                            pRipple
-                            icon="pi pi-file-excel"
-                            (click)="exportExcel()"
-                            class="p-button-success mr-2"
-                            pTooltip="XLS"
-                            tooltipPosition="bottom"
-                        ></button>
-                        <button
-                            type="button"
-                            pButton
-                            pRipple
-                            icon="pi pi-file-pdf"
-                            (click)="exportPdf()"
-                            class="p-button-warning mr-2"
-                            pTooltip="PDF"
-                            tooltipPosition="bottom"
-                        ></button>
+                        <h5>Prefix CO</h5>
+
                         <span class="p-input-icon-left mb-2 ml-auto">
                             <i class="pi pi-search"></i>
                             <input
@@ -61,7 +80,10 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="min-width: 12rem">
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th style="min-width: 6rem">
                             <div
                                 class="flex justify-content-between align-items-center"
                             >
@@ -81,7 +103,7 @@
                                 ></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 14rem">
+                        <th style="min-width: 15rem">
                             <div
                                 class="flex justify-content-between align-items-center"
                             >
@@ -94,14 +116,14 @@
                                 ></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 14rem">
-							
-							
-						</th>
+                        <th style="min-width: 8rem"></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-item>
                     <tr>
+                        <td>
+                            <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                        </td>
                         <td>
                             {{ item.id }}
                         </td>
@@ -112,11 +134,23 @@
                             {{ item.solusi }}
                         </td>
                         <td>
-                        <div class="flex">
-                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
-                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
-                        </div>
-                    </td>
+                            <div class="flex">
+                                <button
+                                    pButton
+                                    pRipple
+                                    icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success mr-2"
+                                    (click)="editPrefix(item)"
+                                ></button>
+                                <button
+                                    pButton
+                                    pRipple
+                                    icon="pi pi-trash"
+                                    class="p-button-rounded p-button-warning"
+                                    (click)="deletePrefix(item)"
+                                ></button>
+                            </div>
+                        </td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
@@ -126,12 +160,168 @@
                 </ng-template>
                 <ng-template pTemplate="loadingbody">
                     <tr>
-                        <td colspan="8">
-                            Loading customers data. Please wait.
-                        </td>
+                        <td colspan="8">Loading prefix data. Please wait.</td>
                     </tr>
                 </ng-template>
             </p-table>
         </div>
+        <p-dialog
+            [(visible)]="prefixDialog"
+            [style]="{ width: '450px' }"
+            header="Edit Prefix"
+            [modal]="true"
+            class="p-fluid"
+        >
+            <ng-template pTemplate="content">
+                <div class="field">
+                    <label for="id">ID</label>
+                    <input
+                        type="text"
+                        pInputText
+                        id="id"
+                        [(ngModel)]="item.id"
+                        [readonly]="isReadOnlyMode"
+                        autofocus
+                    />
+                </div>
+                <div class="field">
+                    <label for="masalah">masalah</label>
+                    <input
+                        type="text"
+                        pInputText
+                        id="masalah"
+                        [(ngModel)]="item.masalah"
+                        [readonly]="isReadOnlyMode"
+                        autofocus
+                    />
+                </div>
+                <div class="field">
+                    <label for="description">Prefix Solusi</label>
+                    <textarea
+                        id="description"
+                        pInputTextarea
+                        [(ngModel)]="item.solusi"
+                        required
+                        rows="20"
+                        cols="10"
+                    ></textarea>
+                    <small
+                        class="ng-dirty ng-invalid"
+                        *ngIf="submitted && !selectedPrefix.solusi"
+                        >Prefix Solusi is required.</small
+                    >
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button
+                    pButton
+                    pRipple
+                    label="Cancel"
+                    icon="pi pi-times"
+                    class="p-button-text"
+                    (click)="hideDialog()"
+                ></button>
+                <button
+                    pButton
+                    pRipple
+                    label="Save"
+                    icon="pi pi-check"
+                    class="p-button-text"
+                    (click)="savePrefix()"
+                ></button>
+            </ng-template>
+        </p-dialog>
+        <p-dialog
+            [(visible)]="prefixInput"
+            [style]="{ width: '450px' }"
+            header="Input Prefix"
+            [modal]="true"
+            class="p-fluid"
+        >
+            <ng-template pTemplate="content">
+                <div class="field">
+                    <label for="inputmasalah">Masalah</label>
+                    <p-autoComplete
+                        [(ngModel)]="selectedData"
+                        [suggestions]="masalahOptions"
+                        field="label"
+                        [dropdown]="true"
+                        [minLength]="1"
+                        placeholder="Pilih data"
+                    ></p-autoComplete>
+                </div>
+                <div class="field">
+                    <label for="description">Prefix Solusi</label>
+                    <textarea
+                        id="description"
+                        pInputTextarea
+                        required
+                        rows="20"
+                        cols="10"
+                    ></textarea>
+                    <small
+                        class="ng-dirty ng-invalid"
+                        *ngIf="submitted && !selectedPrefix.solusi"
+                        >Prefix Solusi is required.</small
+                    >
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button
+                    pButton
+                    pRipple
+                    label="Cancel"
+                    icon="pi pi-times"
+                    class="p-button-text"
+                    (click)="hideDialog()"
+                ></button>
+                <button
+                    pButton
+                    pRipple
+                    label="Save"
+                    icon="pi pi-check"
+                    class="p-button-text"
+                    (click)="savePrefix()"
+                ></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog
+            [(visible)]="deletePrefixDialog"
+            header="Confirm"
+            [modal]="true"
+            [style]="{ width: '450px' }"
+        >
+            <div class="flex align-items-center justify-content-center">
+                <i
+                    class="pi pi-exclamation-triangle mr-3"
+                    style="font-size: 2rem"
+                ></i>
+                <span *ngIf="item"
+                    >Apakah yakin akan hapus prefix <b>id {{ item.id }}</b
+                    >?</span
+                >
+            </div>
+            <ng-template pTemplate="footer">
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-times"
+                    class="p-button-text"
+                    label="No"
+                    (click)="deletePrefixDialog = false"
+                ></button>
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-check"
+                    class="p-button-text"
+                    label="Yes"
+                    (click)="confirmDelete()"
+                ></button>
+            </ng-template>
+        </p-dialog>
     </div>
 </div>

@@ -63,6 +63,7 @@ export class CrudComponent implements OnInit {
     editProduct(product: Product) {
         this.product = { ...product };
         this.productDialog = true;
+        console.log(this.product.inventoryStatus);
     }
 
     deleteProduct(product: Product) {

@@ -3,7 +3,7 @@
     [value]="datasimulasi"
     dataKey="id"
     [rows]="10"
-    [loading]="false"
+    [loading]="loading"
     [rowHover]="true"
     styleClass="p-datatable-gridlines"
     [paginator]="true"
@@ -67,6 +67,18 @@
                         {{ change.perubahan }}<br />
                     </div>
                 </p-dialog>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No data found.</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="loadingbody">
+        <tr>
+            <td colspan="8">
+                Loading simulasi data. Please wait.
             </td>
         </tr>
     </ng-template>

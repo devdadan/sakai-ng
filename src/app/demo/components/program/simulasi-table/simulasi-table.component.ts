@@ -18,10 +18,13 @@ export class SimulasiTableComponent implements OnInit {
 
     async ngOnInit() {
         try {
+            this.loading = true;
             this.datasimulasi = await this.simulasiservice.getData().toPromise();
             this.datasimulasi.forEach((row) => (this.visible[row.id] = false));
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            this.loading = false;
         }
     }
 
